@@ -4,7 +4,7 @@ Sistema embarcado para reconhecimento em tempo real de golpes de boxe utilizando
 
 ---
 
-# 📖 Visão Geral
+## 📖 Visão Geral
 
 Este projeto consiste em um dispositivo vestível capaz de identificar automaticamente golpes de boxe por meio dos sensores inerciais presentes no **Arduino Nano 33 BLE Sense**.
 
@@ -20,22 +20,7 @@ Após a coleta dos dados, o dataset foi utilizado para treinar um modelo de Inte
 
 ---
 
-# 🔧 Hardware
-
-<p align="center">
-<img src="imagens/dispositivo.jpeg" width="700">
-</p>
-
-## Componentes utilizados
-
-- Arduino Nano 33 BLE Sense
-- Bateria USB 5 V
-- Suporte de acrílico para relógio
-- Cabo USB
-
----
-
-# ⚙️ Funcionamento
+## ⚙️ Funcionamento
 
 O dispositivo realiza continuamente a leitura do **acelerômetro** (X, Y, Z) e do **giroscópio** (X, Y, Z) embarcados no microcontrolador.
 
@@ -45,44 +30,26 @@ O resultado da inferência é disponibilizado via **Bluetooth Low Energy (BLE)**
 
 ---
 
-# 📁 Estrutura do Projeto
+## 🔧 Hardware
 
-```text
-.
-├── codigos
-│   ├── aquisicao_dataset
-│   │   └── aquisicao_dataset.ino
-│   │
-│   └── main
-│       └── main.ino
-│
-├── dataset_construido
-│   ├── cruzado
-│   ├── direto
-│   ├── gancho
-│   ├── guarda
-│   └── neutro
-│
-├── imagens
-│   ├── como_usar.jpeg
-│   ├── dispositivo.jpeg
-│
-├── README.md
-│
-├── apresentacao.pdf
-│
-└──  biblioteca_edgeimpulse_gerada.zip
-```
+<p align="center">
+  <img src="imagens/dispositivo.jpeg" width="700">
+</p>
+
+### Componentes utilizados
+
+- Arduino Nano 33 BLE Sense
+- Bateria USB 5 V
+- Suporte de acrílico para relógio
+- Cabo USB
 
 ---
 
-# 📂 Aquisição do Dataset
+## 📂 Aquisição do Dataset
 
 O código localizado em `codigos/aquisicao_dataset` foi utilizado para construir o dataset empregado no treinamento da Inteligência Artificial.
 
-Cada aquisição possui aproximadamente **1 segundo** de duração.
-
-Durante esse período foram registradas as seguintes informações:
+Cada aquisição possui aproximadamente **1 segundo** de duração. Durante esse período foram registradas as seguintes informações:
 
 - Timestamp
 - Aceleração X
@@ -104,13 +71,11 @@ dataset_construido
 └── neutro
 ```
 
-Cada classe contém **30 arquivos CSV**, correspondentes a 30 execuções independentes do movimento.
-
-Cada arquivo representa aproximadamente **1 segundo** de dados coletados pelos sensores.
+Cada classe contém **30 arquivos CSV**, correspondentes a 30 execuções independentes do movimento. Cada arquivo representa aproximadamente **1 segundo** de dados coletados pelos sensores.
 
 ---
 
-# 🧠 Treinamento do Modelo
+## 🧠 Treinamento do Modelo
 
 Após a aquisição do dataset, foram realizadas as seguintes etapas:
 
@@ -118,11 +83,55 @@ Após a aquisição do dataset, foram realizadas as seguintes etapas:
 2. Treinamento do modelo de Inteligência Artificial;
 3. Exportação do modelo como biblioteca para Arduino IDE.
 
-A biblioteca exportada encontra-se disponível no arquivo `biblioteca_edgeimpulse_gerada.zip`
+A biblioteca exportada encontra-se disponível no arquivo `biblioteca_edgeimpulse_gerada.zip`.
 
 ---
 
-# 📦 Instalação da Biblioteca
+## 💻 Código Principal
+
+O código principal encontra-se em `codigos/main`. Este código é responsável por:
+
+- realizar a leitura do acelerômetro;
+- realizar a leitura do giroscópio;
+- executar a inferência do modelo de IA;
+- disponibilizar os resultados via Bluetooth Low Energy;
+- atualizar os contadores de golpes reconhecidos.
+
+---
+
+## 📈 Resultados
+
+### Matriz de Confusão
+
+<p align="center">
+  <img src="imagens/matriz_confusao.png" width="650">
+</p>
+
+### Desempenho do Modelo
+
+<p align="center">
+  <img src="imagens/indices.png" width="650">
+</p>
+
+### Padrão dos Sinais Coletados
+
+O desenvolvimento do sistema foi possível devido aos diferentes sinais gerados durante a execução de cada golpe. Observou-se que cada movimento apresenta um padrão característico nos sinais obtidos pelos sensores, permitindo a classificação dos golpes realizados.
+
+Além das classes correspondentes aos golpes, foram adicionadas as classes **Guarda** e **Neutro**. Essas classes têm como objetivo auxiliar o modelo a diferenciar estados que não representam golpes, evitando classificações incorretas durante o uso do sistema. Dessa forma, elas não são utilizadas como critérios de classificação para exibição ao usuário, mas sim como estados auxiliares para melhorar a tomada de decisão do modelo.
+
+No entanto, verificou-se que os valores provenientes do acelerômetro apresentaram pouca variação durante os movimentos, indicando menor contribuição desse sensor para a diferenciação entre as classes.
+
+<p align="center">
+  <img src="imagens/cruzado.png" width="300">
+  <img src="imagens/direto.png" width="300">
+  <img src="imagens/gancho.png" width="300">
+</p>
+
+---
+
+## 🚀 Como Utilizar
+
+### Instalação da Biblioteca
 
 Na Arduino IDE:
 
@@ -136,49 +145,25 @@ Selecione o arquivo `biblioteca_edgeimpulse_gerada.zip`.
 
 Após a instalação, a biblioteca estará disponível para compilação do projeto.
 
----
-
-# 💻 Código Principal
-
-O código principal encontra-se em `codigos/main`.
-
-Este código é responsável por:
-
-- realizar a leitura do acelerômetro;
-- realizar a leitura do giroscópio;
-- executar a inferência do modelo de IA;
-- disponibilizar os resultados via Bluetooth Low Energy;
-- atualizar os contadores de golpes reconhecidos.
-
----
-
-# 🚀 Como Utilizar
-
-## 1. Alimentação
+### Alimentação
 
 Conecte o Arduino Nano 33 BLE Sense a uma bateria USB de 5 V.
 
----
-
-## 2. Posicionamento
+### Posicionamento
 
 Fixe o dispositivo no **pulso direito**, conforme ilustrado abaixo.
 
 **Importante:** o conector USB deve ficar voltado para o dedo mindinho.
 
 <p align="center">
-<img src="imagens/como_usar.jpeg" width="500">
+  <img src="imagens/como_usar.jpeg" width="500">
 </p>
 
----
-
-## 3. Conexão BLE
+### Conexão BLE
 
 Abra a interface Web compatível com Bluetooth Low Energy e conecte-se ao dispositivo.
 
----
-
-## 4. Execução
+### Execução
 
 Após conectado, realize um dos golpes:
 
@@ -187,58 +172,3 @@ Após conectado, realize um dos golpes:
 - Gancho
 
 Sempre que um golpe for identificado, o contador correspondente será incrementado automaticamente na interface.
-
----
-
-# 📈 Resultados
-
-## Matriz de Confusão e Desempenho do Modelo
-
-<p align="center">
-  <img src="imagens/matriz_de_confusao.png" height="400">
-  <img src="imagens/metricas.png" height="400">
-</p>
-
----
-
-# 📉 Sinais Coletados
-
-## Direto
-
-<p align="center">
-<img src="images/direto.png" width="700">
-</p>
-
----
-
-## Cruzado
-
-<p align="center">
-<img src="images/cruzado.png" width="700">
-</p>
-
----
-
-## Gancho
-
-<p align="center">
-<img src="images/gancho.png" width="700">
-</p>
-
----
-
-# 🛠 Tecnologias Utilizadas
-
-- Arduino IDE
-- Arduino Nano 33 BLE Sense
-- Edge Impulse
-- TinyML
-- Bluetooth Low Energy (BLE)
-- C++
-- Machine Learning Embarcado
-
----
-
-# 📄 Licença
-
-Este projeto foi desenvolvido para fins acadêmicos e de pesquisa.
