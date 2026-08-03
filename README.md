@@ -20,40 +20,24 @@ Após a coleta dos dados, o dataset foi utilizado para treinar um modelo de Inte
 
 ---
 
-# 📸 Dispositivo
+# 🔧 Hardware
 
 <p align="center">
-<img src="imagens/dispositivo.jpeg" width="350">
+<img src="imagens/dispositivo.jpeg" width="700">
 </p>
-
----
-
-# 🔧 Hardware
 
 ## Componentes utilizados
 
 - Arduino Nano 33 BLE Sense
-- Bateria USB 5 V (Power Bank)
-- Pulseira/suporte para relógio
+- Bateria USB 5 V
+- Suporte de acrílico para relógio
 - Cabo USB
 
 ---
 
 # ⚙️ Funcionamento
 
-O dispositivo realiza continuamente a leitura dos sensores embarcados:
-
-### Acelerômetro
-
-- X
-- Y
-- Z
-
-### Giroscópio
-
-- X
-- Y
-- Z
+O dispositivo realiza continuamente a leitura do **acelerômetro** (X, Y, Z) e do **giroscópio** (X, Y, Z) embarcados no microcontrolador.
 
 As leituras são enviadas ao modelo de Inteligência Artificial embarcado, responsável por identificar qual golpe está sendo executado.
 
@@ -79,26 +63,26 @@ O resultado da inferência é disponibilizado via **Bluetooth Low Energy (BLE)**
 │   ├── guarda
 │   └── neutro
 │
-├── biblioteca_edgeimpulse_gerada.zip
+├── imagens
+│   ├── como_usar.jpeg
+│   ├── dispositivo.jpeg
 │
-└── README.md
+├── README.md
+│
+├── apresentacao.pdf
+│
+└──  biblioteca_edgeimpulse_gerada.zip
 ```
 
 ---
 
 # 📂 Aquisição do Dataset
 
-O código localizado em
-
-```text
-codigos/aquisicao_dataset
-```
-
-foi utilizado para construir o dataset empregado no treinamento da Inteligência Artificial.
+O código localizado em `codigos/aquisicao_dataset` foi utilizado para construir o dataset empregado no treinamento da Inteligência Artificial.
 
 Cada aquisição possui aproximadamente **1 segundo** de duração.
 
-Durante esse período são registradas as seguintes informações:
+Durante esse período foram registradas as seguintes informações:
 
 - Timestamp
 - Aceleração X
@@ -108,13 +92,7 @@ Durante esse período são registradas as seguintes informações:
 - Velocidade Angular Y
 - Velocidade Angular Z
 
-Os dados são armazenados em arquivos CSV.
-
----
-
-# 📊 Dataset
-
-O dataset encontra-se organizado conforme mostrado abaixo:
+Os dados foram armazenados em arquivos CSV. O dataset encontra-se organizado conforme mostrado abaixo:
 
 ```text
 dataset_construido
@@ -137,15 +115,10 @@ Cada arquivo representa aproximadamente **1 segundo** de dados coletados pelos s
 Após a aquisição do dataset, foram realizadas as seguintes etapas:
 
 1. Importação dos arquivos CSV para o Edge Impulse;
-2. Processamento dos sinais;
-3. Treinamento do modelo de Inteligência Artificial;
-4. Exportação do modelo como biblioteca para Arduino IDE.
+2. Treinamento do modelo de Inteligência Artificial;
+3. Exportação do modelo como biblioteca para Arduino IDE.
 
-A biblioteca exportada encontra-se disponível no arquivo:
-
-```text
-biblioteca_edgeimpulse_gerada.zip
-```
+A biblioteca exportada encontra-se disponível no arquivo `biblioteca_edgeimpulse_gerada.zip`
 
 ---
 
@@ -159,11 +132,7 @@ Sketch
 → Add .ZIP Library...
 ```
 
-Selecione o arquivo:
-
-```
-biblioteca_edgeimpulse_gerada.zip
-```
+Selecione o arquivo `biblioteca_edgeimpulse_gerada.zip`.
 
 Após a instalação, a biblioteca estará disponível para compilação do projeto.
 
@@ -171,11 +140,7 @@ Após a instalação, a biblioteca estará disponível para compilação do proj
 
 # 💻 Código Principal
 
-O código principal encontra-se em
-
-```text
-codigos/main
-```
+O código principal encontra-se em `codigos/main`.
 
 Este código é responsável por:
 
@@ -199,10 +164,10 @@ Conecte o Arduino Nano 33 BLE Sense a uma bateria USB de 5 V.
 
 Fixe o dispositivo no **pulso direito**, conforme ilustrado abaixo.
 
-**Importante:** o conector USB deve ficar voltado para o dedo mínimo.
+**Importante:** o conector USB deve ficar voltado para o dedo mindinho.
 
 <p align="center">
-<img src="images/orientacao.jpg" width="350">
+<img src="imagens/como_usar.jpeg" width="500">
 </p>
 
 ---
@@ -227,29 +192,12 @@ Sempre que um golpe for identificado, o contador correspondente será incrementa
 
 # 📈 Resultados
 
-## Matriz de Confusão
+## Matriz de Confusão e Desempenho do Modelo
 
 <p align="center">
-<img src="images/confusion_matrix.png" width="650">
+  <img src="imagens/matriz_de_confusao.png" height="400">
+  <img src="imagens/metricas.png" height="400">
 </p>
-
----
-
-## Desempenho do Modelo
-
-<p align="center">
-<img src="images/performance.png" width="650">
-</p>
-
-Exemplo de métricas apresentadas:
-
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- Tempo de inferência (~1 ms)
-- Uso de memória RAM
-- Uso de memória Flash
 
 ---
 
