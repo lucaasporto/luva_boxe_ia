@@ -1,4 +1,19 @@
-# 🥊 Dispositivo com IA para Classificação de Golpes
+
+	
+
+<table border="0">
+  <tr>
+    <td width="220" align="center" valign="middle">
+      <img src="imagens/icon.png" width="200">
+    </td>
+    <td valign="middle">
+      <h1>Dispositivo com TinyML para Reconhecimento de Golpes em Esportes de Combate</h1>
+    </td>
+  </tr>
+</table>
+
+
+
 
 Sistema embarcado para reconhecimento em tempo real de golpes de boxe utilizando Inteligência Artificial executando diretamente em um **Arduino Nano 33 BLE Sense**.
 
