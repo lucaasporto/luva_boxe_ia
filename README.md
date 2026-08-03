@@ -1,6 +1,3 @@
-
-	
-
 <table border="0">
   <tr>
     <td width="220" align="center" valign="middle">
@@ -11,9 +8,6 @@
     </td>
   </tr>
 </table>
-
-
-
 
 Sistema embarcado para reconhecimento em tempo real de golpes de boxe utilizando Inteligência Artificial executando diretamente em um **Arduino Nano 33 BLE Sense**.
 
