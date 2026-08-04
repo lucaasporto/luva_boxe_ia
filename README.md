@@ -19,7 +19,7 @@ Projeto desenvolvido como trabalho final da disciplina **Tópicos Especiais I �
 
 Autor: **Lucas Porto Ribeiro**
 
-Ano: **2026**
+Semestre: **2026/1**
 
 ## 🎯 Objetivo
 
