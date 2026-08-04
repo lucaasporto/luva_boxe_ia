@@ -15,11 +15,17 @@ Sistema embarcado para reconhecimento em tempo real de golpes de boxe utilizando
 
 ## 📖 Visão Geral
 
-Desenvolvido como entrega final da disciplina de **Tópicos Especiais I (IA na Borda)**, ministrada pelo **Prof. Dr. Roderval Marcelino**, este trabalho foi desenvolvido por **Lucas Porto Ribeiro**.
+Projeto desenvolvido como trabalho final da disciplina **Tópicos Especiais I – IA na Borda (DEC7551)**, do curso de **Engenharia de Computação da Universidade Federal de Santa Catarina – Campus Araranguá**, sob orientação do **Prof. Dr. Roderval Marcelino**.
 
-Trata-se de um dispositivo vestível capaz de identificar automaticamente golpes de boxe por meio dos sensores inerciais presentes no **Arduino Nano 33 BLE Sense**.
+Autor: **Lucas Porto Ribeiro**
 
-Inicialmente foi desenvolvido um sistema para aquisição de dados do acelerômetro e do giroscópio, permitindo a construção de um dataset contendo cinco classes de movimentos:
+Ano: **2026**
+
+## 🎯 Objetivo
+
+O trabalho tem como objetivo o desenvolvimento de um dispositivo vestível capaz de identificar automaticamente golpes de boxe utilizando Inteligência Artificial embarcada no **Arduino Nano 33 BLE Sense**.
+
+Para o desenvolvimento do modelo, foram coletados dados dos movimentos realizados durante os golpes, permitindo a construção de um dataset contendo cinco classes:
 
 - Direto
 - Cruzado
@@ -181,3 +187,8 @@ Após conectado, realize um dos golpes:
 - Gancho
 
 Sempre que um golpe for identificado, o contador correspondente será incrementado automaticamente na interface.
+
+## 🔗 Documentos do Projeto
+
+- 📄 [Apresentação em Slides](apresentacao.pdf)
+
