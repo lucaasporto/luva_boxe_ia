@@ -23,9 +23,8 @@ Sistema embarcado para reconhecimento em tempo real de golpes de boxe utilizando
 
 Projeto desenvolvido como trabalho final da disciplina **Tópicos Especiais I – IA na Borda (DEC7551)**, do curso de **Engenharia de Computação da Universidade Federal de Santa Catarina – Campus Araranguá**, sob orientação do **Prof. Dr. Roderval Marcelino**.
 
+**Semestre:** 2026/1 <br>
 **Autor:** Lucas Porto Ribeiro
-
-**Semestre:** 2026/1
 
 ## 🎯 Objetivo
 
