@@ -1,11 +1,13 @@
 <div align="right">
   🇺🇸 <a href="README.md">English</a> | 🇧🇷 <strong>Português</strong>
 </div>
+
 <br>
+
 <table border="0">
   <tr>
     <td width="220" align="center" valign="middle">
-      <img src="imagens/icon.png" width="200">
+      <img src="images/icon.png" width="200">
     </td>
     <td valign="middle">
       <h1>Dispositivo com TinyML para Reconhecimento de Golpes em Esportes de Combate</h1>
@@ -21,9 +23,9 @@ Sistema embarcado para reconhecimento em tempo real de golpes de boxe utilizando
 
 Projeto desenvolvido como trabalho final da disciplina **Tópicos Especiais I – IA na Borda (DEC7551)**, do curso de **Engenharia de Computação da Universidade Federal de Santa Catarina – Campus Araranguá**, sob orientação do **Prof. Dr. Roderval Marcelino**.
 
-Autor: **Lucas Porto Ribeiro**
+**Autor:** Lucas Porto Ribeiro
 
-Semestre: **2026/1**
+**Semestre:** 2026/1
 
 ## 🎯 Objetivo
 
@@ -31,11 +33,11 @@ O trabalho tem como objetivo o desenvolvimento de um dispositivo vestível capaz
 
 Para o desenvolvimento do modelo, foram coletados dados dos movimentos realizados durante os golpes, permitindo a construção de um dataset contendo cinco classes:
 
-- Direto
-- Cruzado
-- Gancho
-- Guarda
-- Neutro
+* Direto
+* Cruzado
+* Gancho
+* Guarda
+* Neutro
 
 ---
 
@@ -52,42 +54,42 @@ O resultado da inferência é disponibilizado via **Bluetooth Low Energy (BLE)**
 ## 🔧 Hardware
 
 <p align="center">
-  <img src="imagens/dispositivo.jpeg" width="700">
+  <img src="images/device.jpeg" width="700">
 </p>
 
 ### Componentes utilizados
 
-- Arduino Nano 33 BLE Sense
-- Bateria USB 5 V
-- Suporte de acrílico para relógio
-- Cabo USB
+* Arduino Nano 33 BLE Sense
+* Bateria USB 5 V
+* Suporte de acrílico para relógio
+* Cabo USB
 
 ---
 
 ## 📂 Aquisição do Dataset
 
-O código localizado em `codigos/aquisicao_dataset` foi utilizado para construir o dataset empregado no treinamento da Inteligência Artificial.
+O código localizado em `src/data_collection` foi utilizado para construir o dataset empregado no treinamento da Inteligência Artificial.
 
 Cada aquisição possui aproximadamente **1 segundo** de duração. Durante esse período foram registradas as seguintes informações:
 
-- Timestamp
-- Aceleração X
-- Aceleração Y
-- Aceleração Z
-- Velocidade Angular X
-- Velocidade Angular Y
-- Velocidade Angular Z
+* Timestamp
+* Aceleração X
+* Aceleração Y
+* Aceleração Z
+* Velocidade Angular X
+* Velocidade Angular Y
+* Velocidade Angular Z
 
-Os dados foram armazenados em arquivos CSV. O dataset encontra-se organizado conforme mostrado abaixo:
+Os dados foram armazenados em arquivos CSV. O dataset processado encontra-se organizado conforme mostrado abaixo:
 
 ```text
-dataset_construido
-│
-├── cruzado
-├── direto
-├── gancho
-├── guarda
-└── neutro
+data/
+└── processed/
+    ├── cruzado/
+    ├── direto/
+    ├── gancho/
+    ├── guarda/
+    └── neutro/
 ```
 
 Cada classe contém **30 arquivos CSV**, correspondentes a 30 execuções independentes do movimento. Cada arquivo representa aproximadamente **1 segundo** de dados coletados pelos sensores.
@@ -102,19 +104,19 @@ Após a aquisição do dataset, foram realizadas as seguintes etapas:
 2. Treinamento do modelo de Inteligência Artificial;
 3. Exportação do modelo como biblioteca para Arduino IDE.
 
-A biblioteca exportada encontra-se disponível no arquivo `biblioteca_edgeimpulse_gerada.zip`.
+A biblioteca exportada encontra-se disponível no arquivo `edgeimpulse_library.zip`.
 
 ---
 
 ## 💻 Código Principal
 
-O código principal encontra-se em `codigos/main`. Este código é responsável por:
+O código principal encontra-se em `src/main`. Este código é responsável por:
 
-- realizar a leitura do acelerômetro;
-- realizar a leitura do giroscópio;
-- executar a inferência do modelo de IA;
-- disponibilizar os resultados via Bluetooth Low Energy;
-- atualizar os contadores de golpes reconhecidos.
+* realizar a leitura do acelerômetro;
+* realizar a leitura do giroscópio;
+* executar a inferência do modelo de IA;
+* disponibilizar os resultados via Bluetooth Low Energy;
+* atualizar os contadores de golpes reconhecidos.
 
 ---
 
@@ -123,13 +125,13 @@ O código principal encontra-se em `codigos/main`. Este código é responsável 
 ### Matriz de Confusão
 
 <p align="center">
-  <img src="imagens/matriz_confusao.png" width="650">
+  <img src="images/confusion_matrix.png" width="650">
 </p>
 
 ### Desempenho do Modelo
 
 <p align="center">
-  <img src="imagens/indices.png" width="650">
+  <img src="images/metrics.png" width="650">
 </p>
 
 ### Padrão dos Sinais Coletados
@@ -141,9 +143,9 @@ Além das classes correspondentes aos golpes, foram adicionadas as classes **Gua
 No entanto, verificou-se que os valores provenientes do acelerômetro apresentaram pouca variação durante os movimentos, indicando menor contribuição desse sensor para a diferenciação entre as classes.
 
 <p align="center">
-  <img src="imagens/cruzado.png" width="300">
-  <img src="imagens/direto.png" width="300">
-  <img src="imagens/gancho.png" width="300">
+  <img src="images/cross.png" width="300">
+  <img src="images/straight.png" width="300">
+  <img src="images/hook.png" width="300">
 </p>
 
 ---
@@ -154,13 +156,13 @@ No entanto, verificou-se que os valores provenientes do acelerômetro apresentar
 
 Na Arduino IDE:
 
-```
+```text
 Sketch
 → Include Library
 → Add .ZIP Library...
 ```
 
-Selecione o arquivo `biblioteca_edgeimpulse_gerada.zip`.
+Selecione o arquivo `edgeimpulse_library.zip`.
 
 Após a instalação, a biblioteca estará disponível para compilação do projeto.
 
@@ -175,7 +177,7 @@ Fixe o dispositivo no **pulso direito**, conforme ilustrado abaixo.
 **Importante:** o conector USB deve ficar voltado para o dedo mindinho.
 
 <p align="center">
-  <img src="imagens/como_usar.jpeg" width="500">
+  <img src="images/how_to_use.jpeg" width="500">
 </p>
 
 ### Conexão BLE
@@ -186,12 +188,12 @@ Abra a interface Web compatível com Bluetooth Low Energy e conecte-se ao dispos
 
 Após conectado, realize um dos golpes:
 
-- Direto
-- Cruzado
-- Gancho
+* Direto
+* Cruzado
+* Gancho
 
 Sempre que um golpe for identificado, o contador correspondente será incrementado automaticamente na interface.
 
 ## 🔗 Documentos do Projeto
 
-- 📄 [Apresentação em Slides](apresentacao.pdf)
+* 📄 [Apresentação em Slides](presentation.pdf)
