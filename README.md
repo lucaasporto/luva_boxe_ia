@@ -1,47 +1,51 @@
+<div align="right">
+  🇺🇸 <strong>English</strong> | 🇧🇷 <a href="README.pt-br.md">Português</a>
+</div>
+<br>
 <table border="0">
   <tr>
     <td width="220" align="center" valign="middle">
       <img src="imagens/icon.png" width="200">
     </td>
     <td valign="middle">
-      <h1>Dispositivo com TinyML para Reconhecimento de Golpes em Esportes de Combate</h1>
+      <h1>Wearable Device with TinyML for Punch Recognition in Combat Sports</h1>
     </td>
   </tr>
 </table>
 
-Sistema embarcado para reconhecimento em tempo real de golpes de boxe utilizando Inteligência Artificial executando diretamente em um **Arduino Nano 33 BLE Sense**.
+Embedded system for real-time recognition of boxing punches using Artificial Intelligence running directly on an **Arduino Nano 33 BLE Sense**.
 
 ---
 
-## 📖 Visão Geral
+## 📖 Overview
 
-Projeto desenvolvido como trabalho final da disciplina **Tópicos Especiais I – IA na Borda (DEC7551)**, do curso de **Engenharia de Computação da Universidade Federal de Santa Catarina – Campus Araranguá**, sob orientação do **Prof. Dr. Roderval Marcelino**.
+Project developed as the final assignment for the course **Special Topics I – AI at the Edge (DEC7551)**, in the **Computer Engineering** program at the **Federal University of Santa Catarina – Araranguá Campus**, under the supervision of **Prof. Dr. Roderval Marcelino**.
 
-Autor: **Lucas Porto Ribeiro**
+Author: **Lucas Porto Ribeiro**
 
-Semestre: **2026/1**
+Semester: **2026/1**
 
-## 🎯 Objetivo
+## 🎯 Objective
 
-O trabalho tem como objetivo o desenvolvimento de um dispositivo vestível capaz de identificar automaticamente golpes de boxe utilizando Inteligência Artificial embarcada no **Arduino Nano 33 BLE Sense**.
+This project aims to develop a wearable device capable of automatically identifying boxing punches using Artificial Intelligence embedded in the **Arduino Nano 33 BLE Sense**.
 
-Para o desenvolvimento do modelo, foram coletados dados dos movimentos realizados durante os golpes, permitindo a construção de um dataset contendo cinco classes:
+To develop the model, data was collected from movements performed during the punches, allowing the construction of a dataset containing five classes:
 
-- Direto
-- Cruzado
-- Gancho
-- Guarda
-- Neutro
+- Cross (Direto)
+- Hook (Cruzado)
+- Uppercut (Gancho)
+- Guard (Guarda)
+- Neutral (Neutro)
 
 ---
 
-## ⚙️ Funcionamento
+## ⚙️ How it Works
 
-O dispositivo realiza continuamente a leitura do **acelerômetro** (X, Y, Z) e do **giroscópio** (X, Y, Z) embarcados no microcontrolador.
+The device continuously reads the **accelerometer** (X, Y, Z) and **gyroscope** (X, Y, Z) embedded in the microcontroller.
 
-As leituras são enviadas ao modelo de Inteligência Artificial embarcado, responsável por identificar qual golpe está sendo executado.
+The readings are sent to the embedded Artificial Intelligence model, which is responsible for identifying the executed punch.
 
-O resultado da inferência é disponibilizado via **Bluetooth Low Energy (BLE)** para uma interface Web, permitindo acompanhar as classificações em tempo real.
+The inference result is made available via **Bluetooth Low Energy (BLE)** to a Web interface, allowing real-time monitoring of the classifications.
 
 ---
 
@@ -51,30 +55,30 @@ O resultado da inferência é disponibilizado via **Bluetooth Low Energy (BLE)**
   <img src="imagens/dispositivo.jpeg" width="700">
 </p>
 
-### Componentes utilizados
+### Components Used
 
 - Arduino Nano 33 BLE Sense
-- Bateria USB 5 V
-- Suporte de acrílico para relógio
-- Cabo USB
+- 5V USB Battery
+- Acrylic watch holder
+- USB Cable
 
 ---
 
-## 📂 Aquisição do Dataset
+## 📂 Dataset Acquisition
 
-O código localizado em `codigos/aquisicao_dataset` foi utilizado para construir o dataset empregado no treinamento da Inteligência Artificial.
+The code located in `codigos/aquisicao_dataset` was used to build the dataset for training the Artificial Intelligence.
 
-Cada aquisição possui aproximadamente **1 segundo** de duração. Durante esse período foram registradas as seguintes informações:
+Each acquisition lasts approximately **1 second**. During this period, the following information was recorded:
 
 - Timestamp
-- Aceleração X
-- Aceleração Y
-- Aceleração Z
-- Velocidade Angular X
-- Velocidade Angular Y
-- Velocidade Angular Z
+- Acceleration X
+- Acceleration Y
+- Acceleration Z
+- Angular Velocity X
+- Angular Velocity Y
+- Angular Velocity Z
 
-Os dados foram armazenados em arquivos CSV. O dataset encontra-se organizado conforme mostrado abaixo:
+The data was stored in CSV files. The dataset is organized as shown below:
 
 ```text
 dataset_construido
@@ -86,55 +90,55 @@ dataset_construido
 └── neutro
 ```
 
-Cada classe contém **30 arquivos CSV**, correspondentes a 30 execuções independentes do movimento. Cada arquivo representa aproximadamente **1 segundo** de dados coletados pelos sensores.
+Each class contains **30 CSV files**, corresponding to 30 independent executions of the movement. Each file represents approximately **1 second** of data collected by the sensors.
 
 ---
 
-## 🧠 Treinamento do Modelo
+## 🧠 Model Training
 
-Após a aquisição do dataset, foram realizadas as seguintes etapas:
+After acquiring the dataset, the following steps were performed:
 
-1. Importação dos arquivos CSV para o Edge Impulse;
-2. Treinamento do modelo de Inteligência Artificial;
-3. Exportação do modelo como biblioteca para Arduino IDE.
+1. Import of CSV files to Edge Impulse;
+2. Training of the Artificial Intelligence model;
+3. Export of the model as an Arduino IDE library.
 
-A biblioteca exportada encontra-se disponível no arquivo `biblioteca_edgeimpulse_gerada.zip`.
-
----
-
-## 💻 Código Principal
-
-O código principal encontra-se em `codigos/main`. Este código é responsável por:
-
-- realizar a leitura do acelerômetro;
-- realizar a leitura do giroscópio;
-- executar a inferência do modelo de IA;
-- disponibilizar os resultados via Bluetooth Low Energy;
-- atualizar os contadores de golpes reconhecidos.
+The exported library is available in the `biblioteca_edgeimpulse_gerada.zip` file.
 
 ---
 
-## 📈 Resultados
+## 💻 Main Code
 
-### Matriz de Confusão
+The main code is located in `codigos/main`. This code is responsible for:
+
+- reading the accelerometer;
+- reading the gyroscope;
+- executing the AI model inference;
+- making the results available via Bluetooth Low Energy;
+- updating the counters for recognized punches.
+
+---
+
+## 📈 Results
+
+### Confusion Matrix
 
 <p align="center">
   <img src="imagens/matriz_confusao.png" width="650">
 </p>
 
-### Desempenho do Modelo
+### Model Performance
 
 <p align="center">
   <img src="imagens/indices.png" width="650">
 </p>
 
-### Padrão dos Sinais Coletados
+### Pattern of Collected Signals
 
-O desenvolvimento do sistema foi possível devido aos diferentes sinais gerados durante a execução de cada golpe. Observou-se que cada movimento apresenta um padrão característico nos sinais obtidos pelos sensores, permitindo a classificação dos golpes realizados.
+The system's development was possible due to the different signals generated during the execution of each punch. It was observed that each movement presents a characteristic pattern in the signals obtained by the sensors, allowing the classification of the executed punches.
 
-Além das classes correspondentes aos golpes, foram adicionadas as classes **Guarda** e **Neutro**. Essas classes têm como objetivo auxiliar o modelo a diferenciar estados que não representam golpes, evitando classificações incorretas durante o uso do sistema. Dessa forma, elas não são utilizadas como critérios de classificação para exibição ao usuário, mas sim como estados auxiliares para melhorar a tomada de decisão do modelo.
+In addition to the classes corresponding to the punches, the **Guard** and **Neutral** classes were added. These classes aim to help the model differentiate states that do not represent punches, avoiding incorrect classifications during system use. Thus, they are not used as classification criteria for display to the user, but rather as auxiliary states to improve the model's decision-making.
 
-No entanto, verificou-se que os valores provenientes do acelerômetro apresentaram pouca variação durante os movimentos, indicando menor contribuição desse sensor para a diferenciação entre as classes.
+However, it was found that the values from the accelerometer showed little variation during the movements, indicating a lower contribution of this sensor to the differentiation between classes.
 
 <p align="center">
   <img src="imagens/cruzado.png" width="300">
@@ -144,11 +148,11 @@ No entanto, verificou-se que os valores provenientes do acelerômetro apresentar
 
 ---
 
-## 🚀 Como Utilizar
+## 🚀 How to Use
 
-### Instalação da Biblioteca
+### Library Installation
 
-Na Arduino IDE:
+In the Arduino IDE:
 
 ```
 Sketch
@@ -156,39 +160,38 @@ Sketch
 → Add .ZIP Library...
 ```
 
-Selecione o arquivo `biblioteca_edgeimpulse_gerada.zip`.
+Select the `biblioteca_edgeimpulse_gerada.zip` file.
 
-Após a instalação, a biblioteca estará disponível para compilação do projeto.
+After installation, the library will be available to compile the project.
 
-### Alimentação
+### Power Supply
 
-Conecte o Arduino Nano 33 BLE Sense a uma bateria USB de 5 V.
+Connect the Arduino Nano 33 BLE Sense to a 5V USB battery.
 
-### Posicionamento
+### Positioning
 
-Fixe o dispositivo no **pulso direito**, conforme ilustrado abaixo.
+Attach the device to your **right wrist**, as illustrated below.
 
-**Importante:** o conector USB deve ficar voltado para o dedo mindinho.
+**Important:** the USB connector must face the pinky finger.
 
 <p align="center">
   <img src="imagens/como_usar.jpeg" width="500">
 </p>
 
-### Conexão BLE
+### BLE Connection
 
-Abra a interface Web compatível com Bluetooth Low Energy e conecte-se ao dispositivo.
+Open a Web interface compatible with Bluetooth Low Energy and connect to the device.
 
-### Execução
+### Execution
 
-Após conectado, realize um dos golpes:
+Once connected, perform one of the punches:
 
-- Direto
-- Cruzado
-- Gancho
+- Cross
+- Hook
+- Uppercut
 
-Sempre que um golpe for identificado, o contador correspondente será incrementado automaticamente na interface.
+Whenever a punch is identified, the corresponding counter will be automatically incremented in the interface.
 
-## 🔗 Documentos do Projeto
+## 🔗 Project Documents
 
-- 📄 [Apresentação em Slides](apresentacao.pdf)
-
+- 📄 [Slide Presentation](apresentacao.pdf)
