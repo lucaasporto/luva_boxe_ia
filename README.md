@@ -23,9 +23,8 @@ Embedded system for real-time recognition of boxing punches using Artificial Int
 
 Project developed as the final assignment for the course **Special Topics I – AI at the Edge (DEC7551)**, in the **Computer Engineering** program at the **Federal University of Santa Catarina – Araranguá Campus**, under the supervision of **Prof. Dr. Roderval Marcelino**.
 
+**Semester:** 2026/1 <br>
 **Author:** Lucas Porto Ribeiro
-
-**Semester:** 2026/1
 
 ## 🎯 Objective
 
