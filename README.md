@@ -1,11 +1,13 @@
 <div align="right">
   🇺🇸 <strong>English</strong> | 🇧🇷 <a href="README.pt-br.md">Português</a>
 </div>
+
 <br>
+
 <table border="0">
   <tr>
     <td width="220" align="center" valign="middle">
-      <img src="imagens/icon.png" width="200">
+      <img src="images/icon.png" width="200">
     </td>
     <td valign="middle">
       <h1>Wearable Device with TinyML for Punch Recognition in Combat Sports</h1>
@@ -21,9 +23,9 @@ Embedded system for real-time recognition of boxing punches using Artificial Int
 
 Project developed as the final assignment for the course **Special Topics I – AI at the Edge (DEC7551)**, in the **Computer Engineering** program at the **Federal University of Santa Catarina – Araranguá Campus**, under the supervision of **Prof. Dr. Roderval Marcelino**.
 
-Author: **Lucas Porto Ribeiro**
+**Author:** Lucas Porto Ribeiro
 
-Semester: **2026/1**
+**Semester:** 2026/1
 
 ## 🎯 Objective
 
@@ -31,11 +33,11 @@ This project aims to develop a wearable device capable of automatically identify
 
 To develop the model, data was collected from movements performed during the punches, allowing the construction of a dataset containing five classes:
 
-- Cross (Direto)
-- Hook (Cruzado)
-- Uppercut (Gancho)
-- Guard (Guarda)
-- Neutral (Neutro)
+* Cross
+* Straight
+* Hook
+* Guard
+* Neutral
 
 ---
 
@@ -52,42 +54,42 @@ The inference result is made available via **Bluetooth Low Energy (BLE)** to a W
 ## 🔧 Hardware
 
 <p align="center">
-  <img src="imagens/dispositivo.jpeg" width="700">
+  <img src="images/device.jpeg" width="700">
 </p>
 
 ### Components Used
 
-- Arduino Nano 33 BLE Sense
-- 5V USB Battery
-- Acrylic watch holder
-- USB Cable
+* Arduino Nano 33 BLE Sense
+* 5V USB Battery
+* Acrylic watch holder
+* USB Cable
 
 ---
 
 ## 📂 Dataset Acquisition
 
-The code located in `codigos/aquisicao_dataset` was used to build the dataset for training the Artificial Intelligence.
+The code located in `src/data_collection` was used to build the dataset for training the Artificial Intelligence model.
 
 Each acquisition lasts approximately **1 second**. During this period, the following information was recorded:
 
-- Timestamp
-- Acceleration X
-- Acceleration Y
-- Acceleration Z
-- Angular Velocity X
-- Angular Velocity Y
-- Angular Velocity Z
+* Timestamp
+* Acceleration X
+* Acceleration Y
+* Acceleration Z
+* Angular Velocity X
+* Angular Velocity Y
+* Angular Velocity Z
 
-The data was stored in CSV files. The dataset is organized as shown below:
+The processed dataset is organized as follows:
 
 ```text
-dataset_construido
-│
-├── cruzado
-├── direto
-├── gancho
-├── guarda
-└── neutro
+data/
+└── processed/
+    ├── cruzado/
+    ├── direto/
+    ├── gancho/
+    ├── guarda/
+    └── neutro/
 ```
 
 Each class contains **30 CSV files**, corresponding to 30 independent executions of the movement. Each file represents approximately **1 second** of data collected by the sensors.
@@ -102,19 +104,21 @@ After acquiring the dataset, the following steps were performed:
 2. Training of the Artificial Intelligence model;
 3. Export of the model as an Arduino IDE library.
 
-The exported library is available in the `biblioteca_edgeimpulse_gerada.zip` file.
+The exported library is available in the `edgeimpulse_library.zip` file.
 
 ---
 
 ## 💻 Main Code
 
-The main code is located in `codigos/main`. This code is responsible for:
+The main code is located in `src/main`.
 
-- reading the accelerometer;
-- reading the gyroscope;
-- executing the AI model inference;
-- making the results available via Bluetooth Low Energy;
-- updating the counters for recognized punches.
+This code is responsible for:
+
+* Reading the accelerometer;
+* Reading the gyroscope;
+* Executing the AI model inference;
+* Making the results available via Bluetooth Low Energy;
+* Updating the counters for recognized punches.
 
 ---
 
@@ -123,13 +127,13 @@ The main code is located in `codigos/main`. This code is responsible for:
 ### Confusion Matrix
 
 <p align="center">
-  <img src="imagens/matriz_confusao.png" width="650">
+  <img src="images/confusion_matrix.png" width="650">
 </p>
 
 ### Model Performance
 
 <p align="center">
-  <img src="imagens/indices.png" width="650">
+  <img src="images/metrics.png" width="650">
 </p>
 
 ### Pattern of Collected Signals
@@ -141,9 +145,9 @@ In addition to the classes corresponding to the punches, the **Guard** and **Neu
 However, it was found that the values from the accelerometer showed little variation during the movements, indicating a lower contribution of this sensor to the differentiation between classes.
 
 <p align="center">
-  <img src="imagens/cruzado.png" width="300">
-  <img src="imagens/direto.png" width="300">
-  <img src="imagens/gancho.png" width="300">
+  <img src="images/cross.png" width="300">
+  <img src="images/straight.png" width="300">
+  <img src="images/hook.png" width="300">
 </p>
 
 ---
@@ -154,13 +158,13 @@ However, it was found that the values from the accelerometer showed little varia
 
 In the Arduino IDE:
 
-```
+```text
 Sketch
 → Include Library
 → Add .ZIP Library...
 ```
 
-Select the `biblioteca_edgeimpulse_gerada.zip` file.
+Select the `edgeimpulse_library.zip` file.
 
 After installation, the library will be available to compile the project.
 
@@ -175,7 +179,7 @@ Attach the device to your **right wrist**, as illustrated below.
 **Important:** the USB connector must face the pinky finger.
 
 <p align="center">
-  <img src="imagens/como_usar.jpeg" width="500">
+  <img src="images/how_to_use.jpeg" width="500">
 </p>
 
 ### BLE Connection
@@ -186,12 +190,12 @@ Open a Web interface compatible with Bluetooth Low Energy and connect to the dev
 
 Once connected, perform one of the punches:
 
-- Cross
-- Hook
-- Uppercut
+* Cross
+* Straight
+* Hook
 
 Whenever a punch is identified, the corresponding counter will be automatically incremented in the interface.
 
 ## 🔗 Project Documents
 
-- 📄 [Slide Presentation](apresentacao.pdf)
+* 📄 [Slide Presentation](presentation.pdf)
